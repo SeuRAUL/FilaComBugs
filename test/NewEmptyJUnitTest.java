@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -93,11 +94,19 @@ public class NewEmptyJUnitTest {
         assertEquals(3, f.removeDaFila());
     }
     
-    @Test(expected=FilaCheiaException.class)
+    @Test
     public void testNaoAddFilaCheia() {
-        for (int i = 0; i < 6; i++) {
+        for(int i=0; i < 5; i++) {
             f.insereNaFila(i);
         }
-        fail("devia ter lançado exception");
+        
+        boolean b = false;
+        try {
+            f.insereNaFila(6);
+        } catch (FilaCheiaException e) {
+            System.out.println(e);
+            b = true;
+        }
+        assertTrue(b);
    }
 }

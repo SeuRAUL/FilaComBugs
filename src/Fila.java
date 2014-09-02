@@ -36,7 +36,7 @@ public class Fila implements IFila {
 	}
 
 	public boolean estaCheia() {
-		return (fim == tam) ? true : false;
+		return (fim == tam-1) ? true : false;
 	}
 
 	public void insereNaFila(Object obj) throws FilaCheiaException {
