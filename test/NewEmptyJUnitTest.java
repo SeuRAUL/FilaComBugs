@@ -94,19 +94,28 @@ public class NewEmptyJUnitTest {
         assertEquals(3, f.removeDaFila());
     }
     
-    @Test
-    public void testNaoAddFilaCheia() {
-        for(int i=0; i < 5; i++) {
+    @Test(expected=FilaCheiaException.class)
+    public void testAddFilaCheia() {
+        for(int i=0; i <= 5; i++) {
             f.insereNaFila(i);
         }
-        
-        boolean b = false;
-        try {
-            f.insereNaFila(6);
-        } catch (FilaCheiaException e) {
-            System.out.println(e);
-            b = true;
-        }
-        assertTrue(b);
    }
+    
+    @Test
+    public void testRemoveFila() {
+        f.insereNaFila(2);
+        f.insereNaFila(4);
+        f.insereNaFila(5);
+        
+        int fim = f.getFim();
+        f.removeDaFila();
+        
+        assertNotSame(f.getFim(), fim);
+        assertEquals(f.getFim(), fim-1);
+    }
+    
+    @Test(expected=FilaVaziaException.class)
+    public void testRemoveFilaVazia() {
+        f.removeDaFila();
+    }
 }
